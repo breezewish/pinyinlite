@@ -1,5 +1,9 @@
 # lwpinyin
 
+[![Dependency Status](https://david-dm.org/SummerWish/lwpinyin.svg)](https://david-dm.org/SummerWish/lwpinyin) [![npm version](http://img.shields.io/npm/v/lwpinyin.svg?style=flat)](https://npmjs.org/package/lwpinyin "View this project on npm") [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+
+[![NPM](https://nodei.co/npm/lwpinyin.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/lwpinyin/)
+
 lwpinyin 是一个轻量级 JavaScript 拼音库，支持多音字，适合在前后端解决基于拼音的字符串匹配问题。
 
 ## 特点
@@ -68,7 +72,7 @@ pinyin('4C，测试', {
 
 ## TODO
 
-[ ] test
+- [ ] test
 
 ## License
 
