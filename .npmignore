@@ -1,0 +1,10 @@
+dev/
+test/
+benchmark/
+.git/
+.gitignore/
+.DS_Store
+
+*.log
+npm-debug.log*
+node_modules/

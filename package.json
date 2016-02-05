@@ -1,0 +1,24 @@
+{
+  "name": "lwpinyin",
+  "version": "0.0.1",
+  "description": "Lightweight Pinyin library",
+  "main": "src/pinyin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bundle": "browserify src/pinyin.js | tee dist/lwpinyin.js | uglifyjs -mc > dist/lwpinyin.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SummerWish/lwpinyin.git"
+  },
+  "keywords": [
+    "pinyin",
+    "拼音"
+  ],
+  "author": "Breezewish",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SummerWish/lwpinyin/issues"
+  },
+  "homepage": "https://github.com/SummerWish/lwpinyin#readme"
+}
