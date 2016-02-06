@@ -1,6 +1,6 @@
 {
   "name": "pinyinlite",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Lightweight Pinyin library",
   "main": "index.js",
   "scripts": {

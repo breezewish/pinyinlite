@@ -1,12 +1,12 @@
 # pinyinlite
 
-[![Dependency Status](https://david-dm.org/SummerWish/pinyinlite.svg)](https://david-dm.org/SummerWish/pinyinlite) [![npm version](http://img.shields.io/npm/v/pinyinlite.svg?style=flat)](https://npmjs.org/package/pinyinlite "View this project on npm") [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/SummerWish/pinyinlite.svg?branch=master)](https://travis-ci.org/SummerWish/pinyinlite) [![Coverage Status](https://coveralls.io/repos/github/SummerWish/pinyinlite/badge.svg?branch=master)](https://coveralls.io/github/SummerWish/pinyinlite?branch=master) [![Dependency Status](https://david-dm.org/SummerWish/pinyinlite.svg)](https://david-dm.org/SummerWish/pinyinlite) [![npm version](http://img.shields.io/npm/v/pinyinlite.svg?style=flat)](https://npmjs.org/package/pinyinlite "View this project on npm") [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 [![NPM](https://nodei.co/npm/pinyinlite.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pinyinlite/)
 
 轻量级 JavaScript 拼音库，支持多音字，适合在前后端解决基于拼音的字符串匹配问题。
 
-```js
+```bash
 npm install pinyinlite
 ```
 
@@ -28,10 +28,22 @@ npm install pinyinlite
 
 ## 使用方法
 
+### Node.js
+
 ```js
 var pinyinlite = require('pinyinlite');
 pinyinlite('增长');
 // => [ [ 'zeng' ], [ 'zhang', 'chang' ] ]
+```
+
+### 浏览器
+
+```html
+<script src="dist/pinyinlite.min.js"></script>
+<script>
+console.log(pinyinlite('世界你好'));
+// => [ [ 'shi' ], [ 'jie' ], [ 'ni' ], [ 'hao' ]]
+</script>
 ```
 
 ## 选项
@@ -58,7 +70,7 @@ pinyinlite('4C，测试', {
 
 ## Benchmark
 
-```js
+```bash
 npm run benchmark
 ```
 
@@ -74,15 +86,19 @@ npm run benchmark
 
 如果你需要将拼音用于呈现，即需要多音字智能识别、音调等功能，请移步：https://github.com/hotoo/pinyin/
 
-## 字典
+## 开发
+
+### 更新字典
 
 字典源文件位于 `dev/dict.txt`。
 
-更新字典源文件后需要使用 `node dev/parse_dict.txt` 生成相应的 `src/dict.js`。
+更新字典源文件后需要调用 `node dev/parse_dict.txt` 生成相应的 `src/dict.js`。
 
-## TODO
+### 运行测试
 
-- [ ] test
+```bash
+npm test
+```
 
 ## License
 
