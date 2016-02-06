@@ -1,16 +1,20 @@
-# lwpinyin
+# pinyinlite
 
-[![Dependency Status](https://david-dm.org/SummerWish/lwpinyin.svg)](https://david-dm.org/SummerWish/lwpinyin) [![npm version](http://img.shields.io/npm/v/lwpinyin.svg?style=flat)](https://npmjs.org/package/lwpinyin "View this project on npm") [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+[![Dependency Status](https://david-dm.org/SummerWish/pinyinlite.svg)](https://david-dm.org/SummerWish/pinyinlite) [![npm version](http://img.shields.io/npm/v/pinyinlite.svg?style=flat)](https://npmjs.org/package/pinyinlite "View this project on npm") [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
-[![NPM](https://nodei.co/npm/lwpinyin.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/lwpinyin/)
+[![NPM](https://nodei.co/npm/pinyinlite.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pinyinlite/)
 
-lwpinyin 是一个轻量级 JavaScript 拼音库，支持多音字，适合在前后端解决基于拼音的字符串匹配问题。
+轻量级 JavaScript 拼音库，支持多音字，适合在前后端解决基于拼音的字符串匹配问题。
+
+```js
+npm install pinyinlite
+```
 
 ## 特点
 
-- Zero Dependency!
+- Zero dependency!
 
-- 收录简体繁体常见字，体积小巧（Minified ~ 80KB, Minified + GZip ~ 55 KB）。
+- 收录简体繁体常见字，体积小巧（minified ~ 80KB, gzip ~ 55 KB）。
 
 - 内存占用低（< 1 MB），效率高（~ 10,000,000 字/s）。
 
@@ -23,15 +27,15 @@ lwpinyin 是一个轻量级 JavaScript 拼音库，支持多音字，适合在�
 ## 使用方法
 
 ```js
-var pinyin = require('lwpinyin');
-pinyin('增长');
+var pinyinlite = require('pinyinlite');
+pinyinlite('增长');
 // => [ [ 'zeng' ], [ 'zhang', 'chang' ] ]
 ```
 
 ## 选项
 
 ```js
-pinyin(str, options)
+pinyinlite(str, options)
 ```
 
 ### options.keepUnrecognized
@@ -41,10 +45,10 @@ pinyin(str, options)
 注意，半角字符总是会原样输出。
 
 ```js
-pinyin('4C，测试');
+pinyinlite('4C，测试');
 // => [ [ '4' ], [ 'C' ], [], [ 'ce' ], [ 'shi' ] ]
 
-pinyin('4C，测试', {
+pinyinlite('4C，测试', {
   keepUnrecognized: true
 });
 // => [ [ '4' ], [ 'C' ], [ '，' ], [ 'ce' ], [ 'shi' ] ]
@@ -52,13 +56,13 @@ pinyin('4C，测试', {
 
 ## Benchmark
 
-|测试项               |字典大小   |require()        |短句  |长句   |平均速度      |
-|--------------------|----------|-----------------|-----|-------|-------------|
-|lwpinyin            |~24000 字 |~970 KB, 10 ms   |<1 ms|~2 ms  |~10^7 字/s   |
-|hutoo/pinyin (web)  |~3500 字  |~2100 KB, 11 ms  |<1 ms|~22 ms |~10^6 字/s   |
-|hutoo/pinyin (node) |~41000 字 |~32530 KB, 132 ms|<1 ms|~210 ms|~10^5 字/s   |
+|测试项               |字典大小   |require() 内存和耗时|长句耗时|速度      |
+|--------------------|----------|------------------|-------|------------|
+| pinyinlite         |~24000 字 |+970 KB, 10 ms    |~2 ms  |~10^7 字/s   |
+|hutoo/pinyin (web)  |~3500 字  |+2100 KB, 11 ms   |~22 ms |~10^6 字/s   |
+|hutoo/pinyin (node) |~41000 字 |+32530 KB, 132 ms |~210 ms|~10^5 字/s   |
 
-配置均为：标注全部多音字、不智能选择多音字、短句长度 4 字，长句长度约 20000 字（见 benchmark 目录）。
+配置均为：标注全部多音字、不智能选择多音字，长句长度约 20000 字（见 benchmark 目录）。
 
 ## 音调、智能多音字
 

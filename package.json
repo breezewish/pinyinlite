@@ -1,15 +1,15 @@
 {
-  "name": "lwpinyin",
+  "name": "pinyinlite",
   "version": "0.0.1",
   "description": "Lightweight Pinyin library",
-  "main": "src/pinyin.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bundle": "browserify src/pinyin.js | tee dist/lwpinyin.js | uglifyjs -mc > dist/lwpinyin.min.js"
+    "bundle": "browserify ./index.js --standalone pinyinlite | tee dist/pinyinlite.js | uglifyjs -mc > dist/pinyinlite.min.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SummerWish/lwpinyin.git"
+    "url": "git+https://github.com/SummerWish/pinyinlite.git"
   },
   "keywords": [
     "pinyin",
@@ -18,7 +18,7 @@
   "author": "Breezewish",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SummerWish/lwpinyin/issues"
+    "url": "https://github.com/SummerWish/pinyinlite/issues"
   },
-  "homepage": "https://github.com/SummerWish/lwpinyin#readme"
+  "homepage": "https://github.com/SummerWish/pinyinlite#readme"
 }
