@@ -1,0 +1,29 @@
+{
+  "name": "pinyinlite",
+  "description": "Lightweight Pinyin library",
+  "main": "dist/pinyinlite.js",
+  "authors": [
+    "Breezewish"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "pinyin",
+    "拼音"
+  ],
+  "homepage": "https://github.com/SummerWish/pinyinlite",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "dev",
+    "benchmark",
+    "coverage",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
