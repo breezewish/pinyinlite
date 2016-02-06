@@ -4,7 +4,8 @@
   "description": "Lightweight Pinyin library",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --check-leaks --reporter dot",
+    "test": "mocha --check-leaks",
+    "test-travis": "istanbul cover ./node_modules/mocha/bin/_mocha --check-leaks",
     "bundle": "browserify ./index.js --standalone pinyinlite | tee dist/pinyinlite.js | uglifyjs -mc > dist/pinyinlite.min.js",
     "benchmark": "node benchmark/run.js"
   },
@@ -22,9 +23,11 @@
     "url": "https://github.com/SummerWish/pinyinlite/issues"
   },
   "homepage": "https://github.com/SummerWish/pinyinlite#readme",
-  "dependencies": {
+  "devDependencies": {
     "async": "^1.5.2",
     "mocha": "^2.4.5",
-    "should": "^8.2.1"
+    "should": "^8.2.1",
+    "coveralls": "^2.11.6",
+    "istanbul": "^0.4.2"
   }
 }

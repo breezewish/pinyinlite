@@ -4,7 +4,10 @@ benchmark/
 .git/
 .gitignore/
 .DS_Store
+.travis.yml
 
 *.log
 npm-debug.log*
 node_modules/
+
+coverage/
