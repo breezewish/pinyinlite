@@ -4,7 +4,7 @@
   "description": "Lightweight Pinyin library",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --check-leaks --reporter dot",
     "bundle": "browserify ./index.js --standalone pinyinlite | tee dist/pinyinlite.js | uglifyjs -mc > dist/pinyinlite.min.js",
     "benchmark": "node benchmark/run.js"
   },
@@ -24,6 +24,7 @@
   "homepage": "https://github.com/SummerWish/pinyinlite#readme",
   "dependencies": {
     "async": "^1.5.2",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "should": "^8.2.1"
   }
 }
