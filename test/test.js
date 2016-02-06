@@ -87,7 +87,7 @@ describe('pinyinlite()', function () {
 
   it('should output all candidate pinyin for heteronyms', function () {
     this.timeout(60000);
-    var dictContent = fs.readFileSync(`${__dirname}/../dev/dict.txt`).toString().split('\n');
+    var dictContent = fs.readFileSync(__dirname + '/../dev/dict.txt').toString().split('\n');
     dictContent.forEach(function (line) {
       if (line.indexOf(' ') === -1) {
         return;
