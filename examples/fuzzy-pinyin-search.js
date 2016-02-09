@@ -43,4 +43,4 @@ const scores = searchItems.map(item => {
   };
 })
 
-console.log(scores.sort((a, b) => b.score - a.score).slice(0, 5).map(item => item.name));
+console.log(scores.filter(i => i.score > 0).sort((a, b) => b.score - a.score).slice(0, 5).map(item => item.name));

@@ -72,6 +72,8 @@ pinyinlite('4C，测试', {
 
 ### 拼音模糊搜索 (examples/fuzzy-pinyin-search.js)
 
+支持全拼或拼音首字母搜索。
+
 ```js
 const items = [
   "肖申克的救赎", "这个杀手不太冷", "阿甘正传", "霸王别姬", "美丽人生", "海上钢琴师", "辛德勒的名单", "千与千寻",
@@ -97,24 +99,24 @@ const scores = searchItems.map(item => {
   };
 })
 
-console.log(scores.sort((a, b) => b.score - a.score).slice(0, 5).map(item => item.name));
+console.log(scores.filter(i => i.score > 0).sort((a, b) => b.score - a.score).slice(0, 5).map(item => item.name));
 ```
 
 ```bash
 $ node fuzzy-pinyin-search.js zhw
-[ '指环王3：王者无敌', '指环王1：魔戒再现', '指环王2：双塔奇兵', '十二怒汉', '美丽人生' ]
+[ '指环王3：王者无敌', '指环王1：魔戒再现', '指环王2：双塔奇兵' ]
 
 $ node fuzzy-pinyin-search.js "zhw wangzhe"
-[ '指环王3：王者无敌', '十二怒汉', '阿甘正传', '霸王别姬', '美丽人生' ]
+[ '指环王3：王者无敌' ]
 
 $ node fuzzy-pinyin-search.js agzz
-[ '阿甘正传', '十二怒汉', '肖申克的救赎', '霸王别姬', '美丽人生' ]
+[ '阿甘正传' ]
 
-$ node fuzzy-pinyin-search.js qianyu
-[ '千与千寻', '十二怒汉', '阿甘正传', '霸王别姬', '美丽人生' ]
+$ node fuzzy-pinyin-search.js tian
+[ '天使爱美丽', '天空之城', '天堂电影院', '放牛班的春天', '泰坦尼克号' ]
 
-$ node fuzzy-pinyin-search.js qyqx
-[ '千与千寻', '十二怒汉', '阿甘正传', '霸王别姬', '美丽人生' ]
+$ node fuzzy-pinyin-search.js vzi   
+[ 'V字仇杀队' ]
 ```
 
 ## Benchmark
