@@ -39,12 +39,14 @@ pinyinlite('增长');
 ### 浏览器
 
 ```html
-<script src="dist/pinyinlite.min.js"></script>
+<script charset="UTF-8" src="dist/pinyinlite.min.js"></script>
 <script>
 console.log(pinyinlite('世界你好'));
 // => [ [ 'shi' ], [ 'jie' ], [ 'ni' ], [ 'hao' ]]
 </script>
 ```
+
+引用脚本时请务必保留 `charset="UTF-8"`，否则在部分浏览器中会由于编码识别错误而产生问题。
 
 ## 选项
 
