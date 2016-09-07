@@ -1,6 +1,6 @@
 # pinyinlite
 
-[![Build Status](https://travis-ci.org/SummerWish/pinyinlite.svg?branch=master)](https://travis-ci.org/SummerWish/pinyinlite) [![Coverage Status](https://coveralls.io/repos/github/SummerWish/pinyinlite/badge.svg?branch=master)](https://coveralls.io/github/SummerWish/pinyinlite?branch=master) [![Dependency Status](https://david-dm.org/SummerWish/pinyinlite.svg)](https://david-dm.org/SummerWish/pinyinlite) [![npm version](http://img.shields.io/npm/v/pinyinlite.svg?style=flat)](https://npmjs.org/package/pinyinlite "View this project on npm") [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/breeswish/pinyinlite.svg?branch=master)](https://travis-ci.org/breeswish/pinyinlite) [![Coverage Status](https://coveralls.io/repos/github/breeswish/pinyinlite/badge.svg?branch=master)](https://coveralls.io/github/breeswish/pinyinlite?branch=master) [![Dependency Status](https://david-dm.org/breeswish/pinyinlite.svg)](https://david-dm.org/breeswish/pinyinlite) [![npm version](http://img.shields.io/npm/v/pinyinlite.svg?style=flat)](https://npmjs.org/package/pinyinlite "View this project on npm") [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 [![NPM](https://nodei.co/npm/pinyinlite.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pinyinlite/)
 

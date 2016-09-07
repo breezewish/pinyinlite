@@ -1,6 +1,6 @@
 {
   "name": "pinyinlite",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lightweight Pinyin library",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SummerWish/pinyinlite.git"
+    "url": "git+https://github.com/breeswish/pinyinlite.git"
   },
   "keywords": [
     "pinyin",
@@ -20,9 +20,9 @@
   "author": "Breezewish",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SummerWish/pinyinlite/issues"
+    "url": "https://github.com/breeswish/pinyinlite/issues"
   },
-  "homepage": "https://github.com/SummerWish/pinyinlite#readme",
+  "homepage": "https://github.com/breeswish/pinyinlite#readme",
   "devDependencies": {
     "async": "^1.5.2",
     "mocha": "^2.4.5",
