@@ -10,7 +10,7 @@
     "pinyin",
     "拼音"
   ],
-  "homepage": "https://github.com/SummerWish/pinyinlite",
+  "homepage": "https://github.com/breeswish/pinyinlite",
   "moduleType": [
     "amd",
     "globals",

@@ -2,9 +2,7 @@
 
 [![Build Status](https://travis-ci.org/breeswish/pinyinlite.svg?branch=master)](https://travis-ci.org/breeswish/pinyinlite) [![Coverage Status](https://coveralls.io/repos/github/breeswish/pinyinlite/badge.svg?branch=master)](https://coveralls.io/github/breeswish/pinyinlite?branch=master) [![Dependency Status](https://david-dm.org/breeswish/pinyinlite.svg)](https://david-dm.org/breeswish/pinyinlite) [![npm version](http://img.shields.io/npm/v/pinyinlite.svg?style=flat)](https://npmjs.org/package/pinyinlite "View this project on npm") [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
-[![NPM](https://nodei.co/npm/pinyinlite.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/pinyinlite/)
-
-轻量级 JavaScript 拼音库，支持多音字，适合在前后端解决基于拼音的字符串匹配问题。
+最快且轻量的 JavaScript 拼音库，用于在前后端提供基于拼音的字符串匹配。
 
 ```bash
 npm install pinyinlite
@@ -12,19 +10,37 @@ npm install pinyinlite
 
 ## 特点
 
-- Zero dependency!
-
 - 字典包含 2.4 万多个简体繁体字，覆盖 Unicode BMP 常见汉字。
-
-- 体积小巧（minified ~ 80KB, gzip ~ 55 KB），适合前端使用。
-
-- 内存占用低（~ 1 MB），效率高（~ 10,000,000 字/s），适合后端使用。
-
+- 体积小（minified ~ 80KB, gzip ~ 55 KB）。
+- 内存占用极低（~ 1 MB），效率极高（~ 10,000,000 字/s）。
 - 支持多音字。
+- 没有任何依赖项。
 
-- 不支持且不计划支持智能选择多音字拼音。
+#### 不支持且不计划支持的功能
 
-- 不支持且不计划支持音调。
+- 智能选择多音字的拼音。
+
+- 音调。
+
+## Q & A
+
+#### Q: 为什么不支持音调？
+
+这个拼音库用于提供基于拼音的搜索和匹配，例如实现支持拼音筛选的自动完成组件等，因此不需要音调。
+
+#### Q: 为什么不支持智能选择多音字？
+
+如上所述，这个拼音库用于提供基于拼音的搜索和匹配。在这种场景下，最重要的是确保用户输入的各种有效的拼音都能被对应到候选项上去，而不是尽可能地只使用一个准确的拼音去匹配用户的输入。
+
+使用准确拼音匹配是不现实的：
+
+- 例如专有名词中一般有固有发音，词典覆盖各种特殊情况是不现实的，另外带来的体积极度膨胀也是不科学的。
+
+- 用户很可能会输入不准确的拼音，例如地域、个人习惯、方言等因素会影响用户多音字的读音，因此即使程序生成了一个准确的拼音，将它与用户的输入进行“相似度匹配”也是不合理的，很可能会出现预期项被漏匹配的情况。
+
+#### Q: 我就想用音调或者智能多音字，有没有什么替代?
+
+请移步其他项目：https://github.com/hotoo/pinyin/
 
 ## 使用方法
 
@@ -74,7 +90,13 @@ pinyinlite('4C，测试', {
 
 ### 拼音模糊搜索 (examples/fuzzy-pinyin-search.js)
 
-支持全拼或拼音首字母搜索。
+支持全拼或拼音首字母搜索。算法：
+
+1. 对于每个候选项，生成它所有可能的读音组合(这个库的核心思想)，即通过 pinyinlite 生成各个字的所有候选读音，然后进行笛卡尔积。
+
+2. 使用 [string_score](https://github.com/joshaven/string_score) 对这些读音组合与用户的输入进行相似度匹配。
+
+3. 选择相似度最高的几个候选项输出。
 
 ```js
 const items = [
@@ -124,20 +146,20 @@ $ node fuzzy-pinyin-search.js vzi
 ## Benchmark
 
 ```bash
+cd pinyinlite
+npm install
 npm run benchmark
 ```
 
-|测试项               |字典大小   |require() 内存和耗时|长句耗时   |速度          |
-|--------------------|----------|------------------|----------|-------------|
-| pinyinlite         |~24000 字 |+1.2 MB, 9.1 ms    |~2.2 ms  |~10^7 字/s   |
-|hotoo/pinyin (web)  |~3500 字  |+2.1 MB, 10.0 ms   |~17.1 ms |~10^6 字/s   |
-|hotoo/pinyin (node) |~41000 字 |+32.3 MB, 123.5 ms |~184.8 ms|~10^5 字/s   |
+以下结果基于 Node.js v6.3.1, OS X v10.10.5:
+
+| 测试项                 | 字典大小     | require() 内存和耗时    | 长句耗时      | 速度        |
+| ------------------- | -------- | ------------------ | --------- | --------- |
+| pinyinlite          | ~24000 字 | +1.4 MB, 9.1 ms    | ~1.9 ms   | ~10^7 字/s |
+| hotoo/pinyin (web)  | ~3500 字  | +2.1 MB, 10.0 ms   | ~17.1 ms  | ~10^6 字/s |
+| hotoo/pinyin (node) | ~41000 字 | +32.3 MB, 123.5 ms | ~184.8 ms | ~10^5 字/s |
 
 配置均为：标注全部多音字、不智能选择多音字，长句长度约 20000 字。
-
-## 音调、智能多音字
-
-如果你需要将拼音用于呈现，即需要多音字智能识别、音调等功能，请移步：https://github.com/hotoo/pinyin/
 
 ## 开发
 
