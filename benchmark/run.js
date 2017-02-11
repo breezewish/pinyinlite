@@ -30,6 +30,14 @@ function runSingleCase(caseName, callback) {
   });
 }
 
-runSingleCase('1', function (err, results) {
+runSingleCase('pinyinlite', function (err, results) {
+  console.log(results);
+});
+
+runSingleCase('hotoopinyin-web', function (err, results) {
+  console.log(results);
+});
+
+runSingleCase('hotoopinyin-full', function (err, results) {
   console.log(results);
 });

@@ -1,14 +1,15 @@
 {
   "name": "pinyinlite",
-  "version": "1.0.1",
-  "description": "Lightweight Pinyin library",
+  "version": "1.1.0",
+  "description": "Lightweight and Lightning-Fast Pinyin library",
   "main": "index.js",
   "scripts": {
     "test": "mocha --check-leaks",
     "test-travis": "istanbul cover ./node_modules/mocha/bin/_mocha --check-leaks",
     "bundle": "browserify ./index.js --standalone pinyinlite | tee dist/pinyinlite.js | uglifyjs -mc > dist/pinyinlite.min.js",
     "benchmark": "node benchmark/run.js",
-    "benchmark:asm": "node --trace-hydrogen --trace-phase=Z --trace-deopt --code-comments --hydrogen-track-positions --redirect-code-traces --redirect-code-traces-to=code.asm --print-opt-code benchmark/v8_sample.js"
+    "benchmark:asm": "node --trace-hydrogen --trace-phase=Z --trace-deopt --code-comments --hydrogen-track-positions --redirect-code-traces --redirect-code-traces-to=benchmark/v8_code.asm --print-opt-code benchmark/v8_sample.js",
+    "gen:dict": "node dev/parseDictionary.js"
   },
   "repository": {
     "type": "git",
@@ -25,10 +26,15 @@
   },
   "homepage": "https://github.com/breeswish/pinyinlite#readme",
   "devDependencies": {
-    "async": "^1.5.2",
-    "mocha": "^2.4.5",
-    "should": "^8.2.1",
+    "browserify": "^14.0.0",
     "coveralls": "^2.11.6",
-    "istanbul": "^0.4.2"
+    "istanbul": "^0.4.2",
+    "lodash.sorteduniq": "^4.2.0",
+    "mocha": "^3.2.0",
+    "request": "^2.79.0",
+    "request-promise-native": "^1.0.3",
+    "should": "^11.2.0",
+    "uglifyjs": "^2.4.10",
+    "yargs": "^6.6.0"
   }
 }

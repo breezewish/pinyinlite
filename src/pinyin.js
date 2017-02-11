@@ -92,7 +92,7 @@ function mergeData() {
 
   // add a boundary for convenience
   lastIdx++;
-  srcChar[lastIdx] = 0xFFFFFFFF;
+  srcChar[lastIdx] = 0x10FFFF;  // Unicode Plane #16 Max
   dstPosition[lastIdx] = i;
 
   // reduce array size
@@ -106,7 +106,7 @@ var init = function () {
   initDict();
   // then we sort them in order to use binary search later
   quicksort(0, dSize - 1);
-  // finally, we merge heteronyms.
+  // finally, we merge heteronyms
   mergeData();
 }
 
@@ -114,13 +114,22 @@ var getPinyin = function (str, options) {
   if (typeof options === 'undefined') {
     options = {};
   }
-  var result = new Array(str.length); // TODO: handle char code > 0xFFFF
+  // FIXME: handle char code > 0xFFFF
+  var result = new Array(str.length);
   var i, imax, j, jmax, k;
   var charCode, idx, iret;
   for (i = 0, imax = str.length; i < imax; ++i) {
     charCode = str.charCodeAt(i);
     if (charCode < 128) {
-      result[i] = [str.charAt(i)];
+      if (options.keepUnrecognized
+        || charCode >= 97 && charCode <= 122    // a-z
+        || charCode >= 65 && charCode <= 90     // A-Z
+        || charCode >= 48 && charCode <= 57     // 0-9
+      ) {
+        result[i] = [str.charAt(i)];
+      } else {
+        result[i] = [];
+      }
     } else {
       idx = binarySearch(charCode);
       if (idx !== -1) {
