@@ -3,7 +3,7 @@ const b = new Benchmarker();
 const sample = require('../sample.js');
 
 b.reset();
-const pinyinlite = require('../../src/pinyin.js');
+const pinyinlite = require('../../index_full.js');
 b.recordDelta('breeswish/pinyinlite require');
 
 b.reset();

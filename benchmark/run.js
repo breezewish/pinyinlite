@@ -30,14 +30,20 @@ function runSingleCase(caseName, callback) {
   });
 }
 
-runSingleCase('pinyinlite', function (err, results) {
-  console.log(results);
-});
+function runCase(name) {
+  return function (callback) {
+    console.log('Running %s...', name);
+    runSingleCase(name, function (err, results) {
+      console.log(results);
+      console.log('');
+      callback();
+    });
+  };
+}
 
-runSingleCase('hotoopinyin-web', function (err, results) {
-  console.log(results);
-});
-
-runSingleCase('hotoopinyin-full', function (err, results) {
-  console.log(results);
-});
+async.series([
+  runCase('hotoopinyin-web'),
+  runCase('hotoopinyin-full'),
+  runCase('pinyinlite-common'),
+  runCase('pinyinlite-full'),
+]);

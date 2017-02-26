@@ -1,7 +1,7 @@
 {
   "name": "pinyinlite",
   "description": "Lightweight Pinyin library",
-  "main": "dist/pinyinlite.js",
+  "main": "dist/pinyinlite_common.min.js",
   "authors": [
     "Breezewish"
   ],
@@ -12,9 +12,7 @@
   ],
   "homepage": "https://github.com/breeswish/pinyinlite",
   "moduleType": [
-    "amd",
-    "globals",
-    "node"
+    "globals"
   ],
   "ignore": [
     "**/.*",

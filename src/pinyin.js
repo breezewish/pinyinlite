@@ -1,17 +1,19 @@
 "use strict";
 
+module.exports = function pinyinliteFactory(dictData) {
+
 var pinyinMapping = null;
 var dSize = 0, srcChar = null, dstPinyin = null, dstPosition = null;
 
 var initDict = function () {
-  var data = require('./dict.js'), item, chars;
+  var item, chars;
   var i, imax, j, jmax;
   dSize = 0;
-  srcChar = new Array(data.n);
-  dstPinyin = new Array(data.n);
-  pinyinMapping = new Array(data.dict.length);
-  for (i = 0, imax = data.dict.length; i < imax; ++i) {
-    item = data.dict[i];
+  srcChar = new Array(dictData.n);
+  dstPinyin = new Array(dictData.n);
+  pinyinMapping = new Array(dictData.dict.length);
+  for (i = 0, imax = dictData.dict.length; i < imax; ++i) {
+    item = dictData.dict[i];
     chars = item[1];
     pinyinMapping[i] = item[0];
     for (j = 0, jmax = chars.length; j < jmax; ++j) {
@@ -110,7 +112,7 @@ var init = function () {
   mergeData();
 }
 
-var getPinyin = function (str, options) {
+var getPinyin = function pinyinlite (str, options) {
   if (typeof options === 'undefined') {
     options = {};
   }
@@ -155,4 +157,6 @@ var getPinyin = function (str, options) {
 
 init();
 
-module.exports = getPinyin;
+return getPinyin;
+
+};

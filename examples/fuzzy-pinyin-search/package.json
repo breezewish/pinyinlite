@@ -1,0 +1,10 @@
+{
+  "name": "pinyinlite-example-fuzzy-pinyin-search",
+  "version": "1.0.0",
+  "dependencies": {
+    "cartesian-product": "^2.1.2",
+    "lodash": "^4.17.4",
+    "optimist": "^0.6.1",
+    "string_score": "^0.1.22"
+  }
+}

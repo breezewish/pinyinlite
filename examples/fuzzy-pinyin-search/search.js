@@ -2,11 +2,11 @@
 
 Getting started:
 
-  npm install lodash string_score cartesian-product optimist
+  npm install
 
-  node fuzzy-pinyin-search.js "zhw wangzhe"  # 指环王3：王者无敌
-  node fuzzy-pinyin-search.js "agan"         # 阿甘正传
-  node fuzzy-pinyin-search.js "qyqx"         # 千与千寻
+  node search.js "zhw wangzhe"  # 指环王3：王者无敌
+  node search.js "agan"         # 阿甘正传
+  node search.js "qyqx"         # 千与千寻
 
 */
 
@@ -17,7 +17,7 @@ const product = require('cartesian-product');
 const argv = require('optimist').argv;
 const _ = require('lodash');
 
-const pinyinlite = require('..');
+const pinyinlite = require('../../');
 
 const items = [
   "肖申克的救赎", "这个杀手不太冷", "阿甘正传", "霸王别姬", "美丽人生", "海上钢琴师", "辛德勒的名单", "千与千寻",
@@ -31,7 +31,10 @@ const items = [
 const searchItems = items.map(name => {
   return {
     name: name,
-    search: [name, ..._.uniq(product(pinyinlite(name).filter(p => p.length > 0)).map(item => item.join(' ')))]
+    search: [name, ..._.uniq(
+        product(pinyinlite(name).filter(p => p.length > 0))
+          .map(item => item.join(' '))
+    )],
   };
 });
 
@@ -39,8 +42,13 @@ const input = argv._[0];
 const scores = searchItems.map(item => {
   return {
     name: item.name,
-    score: _.max(item.search.map(pinyin => pinyin.score(input)))
+    score: _.max(item.search.map(pinyin => pinyin.score(input))),
   };
 })
 
-console.log(scores.filter(i => i.score > 0).sort((a, b) => b.score - a.score).slice(0, 5).map(item => item.name));
+console.log(scores
+  .filter(i => i.score > 0)
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 5)
+  .map(item => item.name)
+);

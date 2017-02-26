@@ -6,11 +6,12 @@
 
 - 内存占用最小（~ 2 MB）且最快（~ 10,000,000 字/s）的 JavaScript 拼音库。
 - 字典包含约 2.7 万简体繁体字，覆盖全面（常用汉字不到五千个）。
-- 体积小（原始大小约 110 KB，gzip 后约 80 KB）。
+- 体积小，gzip 后约 80 KB。
+- 另提供基于【现代汉语通用字表（2013）】的常用字版，包含约 8000 个汉字，gzip 后 25 KB。
 - 支持多音字。
 - 没有任何依赖项。
 
-## 使用方法
+## Usage
 
 ### Node.js
 
@@ -24,19 +25,21 @@ pinyinlite('增长');
 // => [ [ 'zeng' ], [ 'zhang', 'chang' ] ]
 ```
 
-### 浏览器
+### In Browsers
 
 ```html
-<script charset="UTF-8" src="dist/pinyinlite.min.js"></script>
+<script charset="UTF-8" src="dist/pinyinlite_full.min.js"></script>
 <script>
 console.log(pinyinlite('世界你好'));
-// => [ [ 'shi' ], [ 'jie' ], [ 'ni' ], [ 'hao' ]]
+// => [ [ 'shi' ], [ 'jie' ], [ 'ni' ], [ 'hao' ] ]
 </script>
 ```
 
 引用脚本时请务必保留 `charset="UTF-8"`，否则在部分浏览器中会由于编码识别错误而产生问题。
 
-## 选项
+若要用体积更小的常用字版本，请改成引入 `dist/pinyinlite_common.min.js`。
+
+## Options
 
 ```js
 pinyinlite(str, options)
@@ -93,26 +96,29 @@ pinyinlite('4C，测试', {
 
 需求太小，懒得实现。若您的确需要完整的 UTF-16 支持，请开 issue。
 
-## 应用举例
+## Examples
 
-### 拼音模糊搜索 (examples/fuzzy-pinyin-search.js)
+### 拼音模糊搜索 (examples/fuzzy-pinyin-search)
 
 对豆瓣 Top N 电影进行全拼或拼音首字母搜索。
 
 ```bash
-$ node fuzzy-pinyin-search.js zhw
+$ cd examples/fuzzy-pinyin-search
+$ npm install
+
+$ node search.js zhw
 [ '指环王3：王者无敌', '指环王1：魔戒再现', '指环王2：双塔奇兵' ]
 
-$ node fuzzy-pinyin-search.js "zhw wangzhe"
+$ node search.js "zhw wangzhe"
 [ '指环王3：王者无敌' ]
 
-$ node fuzzy-pinyin-search.js agzz
+$ node search.js agzz
 [ '阿甘正传' ]
 
-$ node fuzzy-pinyin-search.js tian
+$ node search.js tian
 [ '天使爱美丽', '天空之城', '天堂电影院', '放牛班的春天', '泰坦尼克号' ]
 
-$ node fuzzy-pinyin-search.js vzi   
+$ node search.js vzi   
 [ 'V字仇杀队' ]
 ```
 
@@ -172,22 +178,35 @@ npm run benchmark
 
 | 测试项                 | 字典大小     | require() 内存和耗时    | 长句耗时      | 速度        |
 | ------------------- | -------- | ------------------ | --------- | --------- |
-| pinyinlite          | ~27000 字 | +2.3 MB, 12.2 ms   | ~2.1 ms   | ~10^7 字/s |
+| pinyinlite (full)   | ~27000 字 | +2.3 MB, 12.2 ms   | ~2.2 ms   | ~10^7 字/s |
+| pinyinlite (common) | ~8000 字  | +1.0 MB, 7.3 ms    | ~2.3 ms   | ~10^7 字/s |
 | hotoo/pinyin (web)  | ~3500 字  | +3.2 MB, 20.2 ms   | ~128.3 ms | ~10^6 字/s |
 | hotoo/pinyin (node) | ~41000 字 | +32.4 MB, 196.7 ms | ~573.4 ms | ~10^5 字/s |
 
 配置均为：标注全部多音字、不智能选择多音字，长句长度约 20000 字。
 
-```
-{ 'breeswish/pinyinlite require': { time: 12.25, memory: 2319196.16 },
-  'breeswish/pinyinlite first call': { time: 5.93, memory: 1806090.24 },
-  'breeswish/pinyinlite second call': { time: 2.19, memory: 987136 } }
+```bash
+$ npm run benchmark
+
+Running hotoopinyin-web...
 { 'hotoo/pinyin require': { time: 20.29, memory: 3274833.92 },
   'hotoo/pinyin first call': { time: 132.9, memory: 9616465.92 },
   'hotoo/pinyin second call': { time: 128.38, memory: 11864145.92 } }
+
+Running hotoopinyin-full...
 { 'hotoo/pinyin require': { time: 196.7, memory: 32487751.68 },
   'hotoo/pinyin first call': { time: 626.3, memory: 19345817.6 },
   'hotoo/pinyin second call': { time: 573.43, memory: 3927777.28 } }
+
+Running pinyinlite-common...
+{ 'breeswish/pinyinlite require': { time: 7.34, memory: 1095884.8 },
+  'breeswish/pinyinlite first call': { time: 5.95, memory: 2166988.8 },
+  'breeswish/pinyinlite second call': { time: 2.3, memory: 946421.76 } }
+
+Running pinyinlite-full...
+{ 'breeswish/pinyinlite require': { time: 12.25, memory: 2319196.16 },
+  'breeswish/pinyinlite first call': { time: 5.93, memory: 1806090.24 },
+  'breeswish/pinyinlite second call': { time: 2.19, memory: 987136 } }
 ```
 
 ## Contribute
@@ -198,12 +217,7 @@ npm run benchmark
 
 ```bash
 npm run gen:dict
-```
-
-### 运行测试
-
-```bash
-npm test
+npm run build
 ```
 
 ## License
