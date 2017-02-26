@@ -1,6 +1,6 @@
 {
   "name": "pinyinlite",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Lightweight and Lightning-Fast Pinyin library",
   "main": "index_full.js",
   "browser": "dist/pinyinlite_common.min.js",
