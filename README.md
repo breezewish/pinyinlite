@@ -22,7 +22,7 @@ npm install pinyinlite
 ```js
 var pinyinlite = require('pinyinlite');
 pinyinlite('增长');
-// => [ [ 'zeng' ], [ 'zhang', 'chang' ] ]
+// => [ [ 'ceng', 'zeng' ], [ 'zhang', 'chang' ] ]
 ```
 
 ### In Browsers
