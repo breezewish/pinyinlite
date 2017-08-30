@@ -5,6 +5,7 @@ benchmark/
 .gitignore/
 .DS_Store
 .travis.yml
+.cache_*
 
 *.log
 npm-debug.log*

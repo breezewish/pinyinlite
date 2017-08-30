@@ -35,3 +35,6 @@ node_modules
 # V8 generated
 hydrogen-*
 *.asm
+
+# Cache
+.cache_*

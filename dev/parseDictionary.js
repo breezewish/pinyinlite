@@ -25,6 +25,26 @@ const chars = {
 };
 const dictTypes = Object.keys(ranges);
 
+function cachedRequest(url) {
+  const fileName = path.basename(url);
+  const cachePath = `.cache_${fileName}`;
+  if (argv.cache !== 'off') {
+    try {
+      const stat = fs.statSync(cachePath);
+      if (Date.now() - stat.mtime.getTime() <= 1 * 24 * 60 * 60 * 1000 /* 1 day */) {
+        console.log('Using cached content for %s', url);
+        return Promise.resolve(fs.readFileSync(cachePath, 'utf-8'));
+      }
+    } catch (ignore) {
+    }
+  }
+  const req = request(url);
+  return req.then(str => {
+    fs.writeFileSync(cachePath, str);
+    return str;
+  });
+}
+
 function parseSource(sourceStr) {
   const ret = [];
   sourceStr.split('\n').forEach(line => {
@@ -53,10 +73,12 @@ function addDict(codePoint, pinyinList) {
       } else if (c.match(/[a-z]/)) {
         return c;
       } else {
+        console.warn('[Code Point = %d] Invalid character `%s` (\\u%s) after applying mapping for `%s`', codePoint, c, ('0000' + c.charCodeAt(0).toString(16)).slice(-4), pinyinRaw);
         valid = false;
         return '';
       }
     }).join('');
+
     if (!valid) {
       return;
     }
@@ -80,7 +102,7 @@ function addDict(codePoint, pinyinList) {
 Promise.resolve()
   .then(() => {
     console.log('Downloading common characters from %s', CHAR_RANGE_URL);
-    return request(CHAR_RANGE_URL);
+    return cachedRequest(CHAR_RANGE_URL);
   })
   .then(rangeStr => {
     const source = parseSource(rangeStr);
@@ -88,13 +110,8 @@ Promise.resolve()
     ranges.common.sort();
   })
   .then(() => {
-    if (argv.dict) {
-      console.log('Using local dictionary %s', argv.dict);
-      return fs.readFileSync(argv.dict, 'utf8');
-    } else {
-      console.log('Downloading latest dictionary from %s', DICTIONARY_URL);
-      return request(DICTIONARY_URL);
-    }
+    console.log('Downloading latest dictionary from %s', DICTIONARY_URL);
+    return cachedRequest(DICTIONARY_URL);
   })
   .then(dictStr => {
     console.log('Parsing dictionary...');
